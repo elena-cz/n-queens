@@ -4,8 +4,10 @@
 
 (function() {
 
+  
   window.Board = Backbone.Model.extend({
 
+   
     initialize: function (params) {
       if (_.isUndefined(params) || _.isNull(params)) {
         console.log('Good guess! But to use the Board() constructor, you must pass it an argument in one of the following formats:');
@@ -17,6 +19,7 @@
         this.set('n', params.length);
       }
     },
+    
 
     rows: function() {
       return _(_.range(this.get('n'))).map(function(rowIndex) {
@@ -56,7 +59,7 @@
 
     _isInBounds: function(rowIndex, colIndex) {
       return (
-        0 <= rowIndex && rowIndex < this.get('n') &&
+        0 <= rowIndex && rowIndex < this.get('n') && 
         0 <= colIndex && colIndex < this.get('n')
       );
     },
@@ -78,8 +81,9 @@
     // --------------------------------------------------------------
     //
     // test if a specific row on this board contains a conflict
+
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      return this.get(rowIndex).reduce((sum, num) => sum + num, 0) > 1 ? true : false;
     },
 
     // test if any rows on this board contain conflicts
