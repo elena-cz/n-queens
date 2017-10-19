@@ -162,12 +162,51 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      //assign rowIdx = 0; 
+      //get our rows array of arrays
+      //assign colIdx to passed in parameter
+      
+      //create empty column array
+      
+      //create for loop to push n values into our column array, 
+      //we will push in our row[rowIdx][colIdx], increment rowIdx and colIdx
+      
+      var rows = this.rows();
+      var n = this.get('n');
+      var diagonal = [];
+      var rowIdx = 0;
+      var colIdx = majorDiagonalColumnIndexAtFirstRow;
+      
+      for (var i = 0; i < n; i++) {
+        var square = rows[rowIdx][colIdx];
+        
+        if (square !== undefined) {
+          diagonal.push(square);
+        }
+        rowIdx++;
+        colIdx++;
+      }
+      
+      return this.hasConflictInArray(diagonal);
+      
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+      
+      // iterate over the possible first row column indexes for diagonals (from -n + 2 to n - 2)
+      // call hasMajorDiagonalConflictAt for each iteration
+      // return true immediately if above is true
+      var n = this.get('n');
+      
+      for (var i = -n + 2; i < n - 1; i++) {
+        if (this.hasMajorDiagonalConflictAt(i)) {
+          return true;
+        }
+      }
+      
+      return false;
+      
     },
 
 
@@ -177,12 +216,41 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      
+      var rows = this.rows();
+      var n = this.get('n');
+      var diagonal = [];
+      var rowIdx = 0;
+      var colIdx = minorDiagonalColumnIndexAtFirstRow;
+      
+      for (var i = 0; i < n; i++) {
+
+        var square = rows[rowIdx][colIdx];
+        
+        
+        if (square !== undefined) {
+          diagonal.push(square);
+        }
+        rowIdx++;
+        colIdx--;
+      }
+      
+      return this.hasConflictInArray(diagonal);
+      
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      return false; // fixme
+      
+      var n = this.get('n');
+      
+      for (var i = 1; i < 2 * n - 2; i++) {
+        if (this.hasMinorDiagonalConflictAt(i)) {
+          return true;
+        }
+      }
+      
+      return false;
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/

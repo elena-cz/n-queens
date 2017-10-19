@@ -77,7 +77,7 @@ see('Expect board1.hasAnyColConflicts()', board1.hasAnyColConflicts(), 'to equal
 see('Expect board3.hasAnyColConflicts()', board3.hasAnyColConflicts(), 'to equal *true* if there are more than two pieces on a column');
 
 // hasMajorDiagonalConflictAt Tests ///
-console.log('\hasMajorDiagonalConflictAt tests'); 
+console.log('\nhasMajorDiagonalConflictAt tests'); 
 
 var board4 = new Board({n: 4}); 
 
@@ -101,8 +101,68 @@ see('Expect board4.hasMajorDiagonalConflictAt(0)', board4.hasMajorDiagonalConfli
 see('Expect board4.hasMajorDiagonalConflictAt(1)', board4.hasMajorDiagonalConflictAt(1), 'to equal *false* if there is only 1 piece in diagonal');
 
 
+// hasAnyMajorDiagonalConflicts Tests ///
+console.log('\nhasAnyMajorDiagonalConflicts tests'); 
+ 
+var board5 = new Board({n: 4});
+
+/*
+0 [0,0,0,0] 
+1 [0,1,1,0] 
+2 [0,0,0,0] 
+3 [0,1,0,0]
+*/
+
+board5.togglePiece(1, 1);
+board5.togglePiece(1, 2);
+board5.togglePiece(3, 1);
 
 
+see('Expect board4.hasAnyMajorDiagonalConflicts()', board4.hasAnyMajorDiagonalConflicts(), 'to equal *true* if any diagonal has more than 1 piece');
+see('Expect board5.hasAnyMajorDiagonalConflicts()', board5.hasAnyMajorDiagonalConflicts(), 'to equal *false* if there are no major diagonal conflicts');
+
+
+
+// hasMinorDiagonalConflictAt Tests ///
+console.log('\nhasMinorDiagonalConflictAt tests'); 
+
+
+// board4
+/*
+0 [0,0,0,0] 
+1 [0,1,1,0] 
+2 [1,0,1,0] 
+3 [0,1,0,0]
+*/
+
+
+see('Expect board4.hasMinorDiagonalConflictAt(2)', board4.hasMinorDiagonalConflictAt(2), 'to equal *true* if there is more than one item in diagonal');
+see('Expect board4.hasMinorDiagonalConflictAt(3)', board4.hasMinorDiagonalConflictAt(3), 'to equal *false* if there are not  more than two pieces in a diagonal');
+see('Expect board4.hasMinorDiagonalConflictAt(4)', board4.hasMinorDiagonalConflictAt(4), 'to equal *true* if there are 2 pieces in a diagonal');
+see('Expect board4.hasMinorDiagonalConflictAt(5)', board4.hasMinorDiagonalConflictAt(5), 'to equal *false* if there are no pieces in diagonal');
+
+
+
+
+// // hasAnyMinorDiagonalConflicts Tests ///
+// console.log('\nhasAnyMajorDiagonalConflicts tests'); 
+ 
+// var board5 = new Board({n: 4});
+
+// /*
+// 0 [0,0,0,0] 
+// 1 [0,1,1,0] 
+// 2 [0,0,0,0] 
+// 3 [0,1,0,0]
+// */
+
+// board5.togglePiece(1, 1);
+// board5.togglePiece(1, 2);
+// board5.togglePiece(3, 1);
+
+
+// see('Expect board4.hasAnyMinorDiagonalConflicts()', board4.hasAnyMinorDiagonalConflicts(), 'to equal *true* if any diagonal has more than 1 piece');
+// see('Expect board5.hasAnyMinorDiagonalConflicts()', board5.hasAnyMinorDiagonalConflicts(), 'to equal *false* if there are no major diagonal conflicts');
 
 
 
