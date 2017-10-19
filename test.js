@@ -142,31 +142,12 @@ see('Expect board4.hasMinorDiagonalConflictAt(4)', board4.hasMinorDiagonalConfli
 see('Expect board4.hasMinorDiagonalConflictAt(5)', board4.hasMinorDiagonalConflictAt(5), 'to equal *false* if there are no pieces in diagonal');
 
 
+// findNRooksSolution Tests ///
+console.log('\nfindNRooksSolution tests'); 
 
-
-// // hasAnyMinorDiagonalConflicts Tests ///
-// console.log('\nhasAnyMajorDiagonalConflicts tests'); 
- 
-// var board5 = new Board({n: 4});
-
-// /*
-// 0 [0,0,0,0] 
-// 1 [0,1,1,0] 
-// 2 [0,0,0,0] 
-// 3 [0,1,0,0]
-// */
-
-// board5.togglePiece(1, 1);
-// board5.togglePiece(1, 2);
-// board5.togglePiece(3, 1);
-
-
-// see('Expect board4.hasAnyMinorDiagonalConflicts()', board4.hasAnyMinorDiagonalConflicts(), 'to equal *true* if any diagonal has more than 1 piece');
-// see('Expect board5.hasAnyMinorDiagonalConflicts()', board5.hasAnyMinorDiagonalConflicts(), 'to equal *false* if there are no major diagonal conflicts');
-
-
-
-
+findNRooksSolution(1);
+findNRooksSolution(2);
+findNRooksSolution(3);
 
 
 
