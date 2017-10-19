@@ -76,6 +76,10 @@
     /*=========================================================================
     =                 TODO: fill in these Helper Functions                    =
     =========================================================================*/
+    //we created a helper function to check a given array for conflicts
+    hasConflictInArray: function(arr) {
+      return arr.reduce((sum, num) => sum + num, 0) > 1 ? true : false;
+    },
 
     // ROWS - run from left to right
     // --------------------------------------------------------------
@@ -83,12 +87,22 @@
     // test if a specific row on this board contains a conflict
 
     hasRowConflictAt: function(rowIndex) {
-      return this.get(rowIndex).reduce((sum, num) => sum + num, 0) > 1 ? true : false;
+      return this.hasConflictInArray(this.get(rowIndex));
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      // Get rows of board
+      // Iterate through every row
+      // - if hasRowConflictAt is true, return true
+      // Otherwise return false
+      var rows = this.rows();
+      for (var i = 0; i < rows.length; i++) {
+        if (this.hasRowConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
     },
 
 
@@ -98,11 +112,46 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+      // Get rows and assign to rows variable
+      // Create column variable and set to empty array
+      // Loop through rows
+      // - Push element of each row at colIndex
+      // Check if sum of column is greater than 1, using new helper function
+      // Returns true if there is more than one piece in a column
+      
+      var rows = this.rows();
+      var col = [];
+      
+      for (var i = 0; i < rows.length; i++) {
+        col.push(rows[i][colIndex]);
+      }
+      return this.hasConflictInArray(col); 
+      // return col.reduce((sum, num) => sum + num, 0) > 1 ? true : false;
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
+      // Get rows and assign to rows variable
+      // Loop through each column index
+      // - Loop through each row
+      // -- Push element of at each column index for row index
+      //  Check if column array has a conflict
+      // Otherwise return false
+      
+      var rows = this.rows();
+      var n = this.get('n');
+      
+      for (var colIdx = 0; colIdx < n; colIdx++) {
+        var col = [];
+
+        for (var rowIdx = 0; rowIdx < n; rowIdx++) {
+          col.push(rows[rowIdx][colIdx]);
+        }
+        if (this.hasConflictInArray(col)) {
+          return true;
+        }
+      }
+            
       return false; // fixme
     },
 
