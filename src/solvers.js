@@ -43,12 +43,12 @@ window.countNRooksSolutions = function(n, board, rowIdx = 0) {
   
   for (var colIdx = 0; colIdx < n; colIdx++) {
     board.togglePiece(rowIdx, colIdx);
-    
-    if (!board.hasColConflictAt(colIdx) && rowIdx === n - 1) {
+        
+    if (rowIdx === n - 1 && !board.hasColConflictAt(colIdx)) {
       solutionCount++; 
     }
     
-    if (!board.hasColConflictAt(colIdx) && rowIdx !== n - 1) {
+    if (rowIdx !== n - 1 && !board.hasColConflictAt(colIdx)) {
       var count = countNRooksSolutions(n, board, rowIdx + 1);
       solutionCount = solutionCount + count;
     }
@@ -60,11 +60,37 @@ window.countNRooksSolutions = function(n, board, rowIdx = 0) {
 };
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n queens placed such that none of them can attack each other
-window.findNQueensSolution = function(n) {
-  var solution = undefined; //fixme
+window.findNQueensSolution = function(n, colIdx = 0) {
 
-  console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
-  return solution;
+  var solution = undefined; //fixme
+  var board = new Board({n: n});
+  var counter = 0;
+  
+  if (n === 0 || n === 2 || n === 3 || colIdx >= n) {
+    return [];
+  }
+  
+  if (counter === n) {
+    solution = board.rows();
+    console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
+    return solution;
+  } else {
+    findNQueensSolution(n, colIdx + 1);
+  }
+  
+  for (var rowIdx = 0; rowIdx < n; rowIdx++) {
+    for (var colIdx = 0; colIdx < n; colIdx++) {
+      board.togglePiece(rowIdx, colIdx); // Toggle on to add piece
+      if (board.hasRowConflictAt(rowIdx) || board.hasColConflictAt(colIdx) || 
+          board.hasMajorDiagonalConflictAt(colIdx - rowIdx) || board.hasMinorDiagonalConflictAt(colIdx + rowIdx)) {
+        board.togglePiece(rowIdx, colIdx); // Toggle off to remove piece
+      } else { //if there are no conflicts
+        counter = counter + 1;
+      } 
+    }
+  }
+  
+  
 };
 
 // return the number of nxn chessboards that exist, with n queens placed such that none of them can attack each other
