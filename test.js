@@ -149,7 +149,10 @@ findNRooksSolution(1);
 findNRooksSolution(2);
 findNRooksSolution(3);
 
+// countNRooksSolutions Tests ///
+console.log('\ncountNRooksSolutions tests'); 
 
+countNRooksSolutions(3);
 
 
 
